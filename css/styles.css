@@ -1,8 +1,24 @@
+/*
+TO-FIX:
+- 
+
+STYLING IDEAS:
+- Center all the junk (including image stinker on My Recipes)
+- Recipe card (My Recipes)
+- Hover links (My Recipes)
+- h1 font stand out (all pages)
+
+*/
+
+
+
+/* GENERAL STYLES-----------------------------------------------------------------------------------------------------*/
 body {
   display: flex;
   flex-direction: column;
   background-color: rgba(250, 243, 221, 1);
   min-height: 100vh;
+  font-family: Georgia;
 }
 
 main {
@@ -10,9 +26,22 @@ main {
   margin: 2.5em;
 }
 
-.mainPageContent{
-  display: flex;
-  justify-content: center;
+nav {
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+p {
+  margin: .4em;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 35px;
+  font-family: "Verdana", sans-serif;
+  margin-left: 0px;
+  margin-right: 0px;
+  width: 100%;
 }
 
 footer {
@@ -24,14 +53,28 @@ footer {
   background-color:  rgb(87, 89, 104);
 }
 
-nav {
-  flex-shrink: 0;
-  flex-grow: 0;
+figure {
+  
 }
 
-p {
-  margin: .4em;
+figcaption {
+  text-align: center;
+  margin: 7px;
+  font-weight: bold;
+  font-size: 1.25em;
 }
+
+img {
+  width: 100%;
+}
+
+/* HOME PAGE -----------------------------------------------------------------------------------------------------*/
+.mainPageContent {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
 .masonry { /* Masonry container */
   column-count: 4;
   column-gap: 1em;
@@ -45,27 +88,55 @@ p {
   height: auto;
 }
 
-figure {
-  
+/* MY RECIPES PAGE -----------------------------------------------------------------------------------------------------*/
+.myRecipeContent {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0px;
 }
 
-figcaption {
-
+.myRecipeList{
+  padding-top: 2em;
+  padding-right: 2em;
+  margin-left: 0em;
+  background-color: rgb(42, 167, 158);
+  align-self: stretch;
 }
 
-img {
-  width: 100%;
+.myRecipeList li{
+  padding-bottom: 10px;
+  font-style: italic;
 }
+
+.myRecipeList ul {
+  list-style: none;
+}
+
+.myRecipe {
+  margin: 35px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.myRecipe img {
+  max-width: 50%;
+}
+
+/* NAV BAR -----------------------------------------------------------------------------------------------------*/
 .bg-dark {
   background-color: rgb(64, 66, 77) !important;
 }
 
-.navbar-dark .navbar-brand{
+.navbar-dark .navbar-brand {
   color: white;
+  font-size: 1.50em;
 }
 
 .navbar-dark .navbar-nav .nav-link {
   color: rgba(143, 192, 169, 1);
+  font-size: 1.20em;
 }
 
 .navbar-dark .navbar-nav .active>.nav-link, 

@@ -1,0 +1,80 @@
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(250, 243, 221, 1);
+  height: 100vh;
+}
+
+main {
+  flex-grow: 1;
+  margin: 2.5em;
+}
+
+.mainPageContent{
+  display: flex;
+  justify-content: center;
+}
+
+footer {
+  display: flex;
+  flex-grow: 0;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  background-color:  rgb(87, 89, 104);
+}
+
+nav {
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+p {
+  margin: .4em;
+}
+.masonry { /* Masonry container */
+  column-count: 4;
+  column-gap: 1em;
+}
+.masonry figure { /* Masonry bricks or child elements */
+  background-color: rgb(42, 167, 158);
+  display: inline-block;
+  margin: 0 0 1em;
+  width: 100%;
+  box-shadow: .2em .2em .2em .2em rgb(175, 170, 153);
+  height: auto;
+}
+
+figure {
+  
+}
+
+figcaption {
+
+}
+
+img {
+  width: 100%;
+}
+.bg-dark {
+  background-color: rgb(64, 66, 77) !important;
+}
+
+.navbar-dark .navbar-brand{
+  color: white;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: rgba(143, 192, 169, 1);
+}
+
+.navbar-dark .navbar-nav .active>.nav-link, 
+.navbar-dark .navbar-nav .nav-link.active, 
+.navbar-dark .navbar-nav .nav-link.show, 
+.navbar-dark .navbar-nav .show>.nav-link {
+  color: rgb(42, 167, 158);
+}
+
+.navbar-dark .navbar-nav .nav-link:focus, .navbar-dark .navbar-nav .nav-link:hover {
+  color: rgba(200, 213, 185, 1);
+}

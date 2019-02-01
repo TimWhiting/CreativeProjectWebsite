@@ -3,11 +3,7 @@ TO-FIX:
 - 
 
 STYLING IDEAS:
-- Center all the junk (including image stinker on My Recipes)
-- Recipe card (My Recipes)
 - Hover links (My Recipes)
-- h1 font stand out (all pages)
-
 */
 
 
@@ -51,6 +47,18 @@ footer {
   justify-content: center;
   align-items: center;
   background-color:  rgb(87, 89, 104);
+  color: white;
+  padding: 7px;
+  font-size: 1.2em;
+}
+
+footer a {
+  color: rgb(147, 151, 175);
+}
+
+footer a:hover {
+  color: rgb(42, 167, 158);
+  text-decoration: none;
 }
 
 figure {
@@ -94,19 +102,33 @@ img {
   justify-content: flex-start;
   align-items: center;
   margin: 0px;
+  align-self: flex-start;
 }
 
-.myRecipeList{
+.myRecipeContent h1 {
+  margin-top: 1em;
+}
+
+.myRecipeList {
   padding-top: 2em;
-  padding-right: 2em;
   margin-left: 0em;
   background-color: rgb(42, 167, 158);
   align-self: stretch;
+
+}
+
+.myRecipeList ul {
+  padding-inline-start: 0em;
+  margin-block-start: 0em;
 }
 
 .myRecipeList li{
-  padding-bottom: 10px;
+  padding: 5px 2em;
   font-style: italic;
+}
+
+.myRecipeList li:hover{
+  background-color: rgb(46, 185, 176);
 }
 
 .myRecipeList ul {
@@ -116,12 +138,88 @@ img {
 .myRecipe {
   margin: 35px;
   display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 2em 1em;
+  box-shadow: .2em .2em .2em .2em rgb(131, 126, 109);
+  background-color: rgb(235, 221, 188);
+}
+
+.myRecipe figure {
+  display: flex;
+  flex-direction: column;
+  order: 1;
+  max-width: 40%;
+}
+
+.myRecipeSection {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+}
+
+.myRecipe img {
+  align-self: center;
+}
+
+.recipeCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* MEAL PLAN PAGE -----------------------------------------------------------------------------------------------------*/
+h3 {
+  text-align: center;
+}
+
+input {
+  max-width: 200px;
+  margin-bottom: 15px;
+}
+
+label {
+  font-size: 18px;
+  font-style: italic;
+}
+
+.weekdays {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.weekday {
+  display: flex;
+  flex-direction: column;
+  margin: 30px;
+  padding: 15px;
+  background-color: rgb(42, 167, 158);
+  box-shadow: .2em .2em .2em .2em rgb(175, 170, 153);
+}
+
+/* LOGIN PAGE -----------------------------------------------------------------------------------------------------*/
+
+
+.loginCard {
+  display: flex;
+  flex-direction: column;
+  margin: 30px;
+  padding: 20px;
+  background-color: rgb(42, 167, 158);
+  box-shadow: .2em .2em .2em .2em rgb(175, 170, 153);
+}
+
+.loginForm {
+  display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.myRecipe img {
-  max-width: 50%;
+.smallCenteredHeader {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.4em;
 }
 
 /* NAV BAR -----------------------------------------------------------------------------------------------------*/
@@ -132,6 +230,11 @@ img {
 .navbar-dark .navbar-brand {
   color: white;
   font-size: 1.50em;
+}
+
+.navbar-nav {
+  flex-grow: 1;
+  display: flex;
 }
 
 .navbar-dark .navbar-nav .nav-link {
@@ -148,4 +251,39 @@ img {
 
 .navbar-dark .navbar-nav .nav-link:focus, .navbar-dark .navbar-nav .nav-link:hover {
   color: rgba(200, 213, 185, 1);
+}
+
+.login {
+  flex-grow: 1;
+  text-align: right;
+  /*background-color: rgb(106, 108, 124) !important;*/
+  /*border-left: 1px solid rgb(107, 110, 126); */
+}
+
+
+
+
+
+
+/* Mobile Styles */
+
+
+@media (max-width: 1000px){
+
+  .login {
+    text-align: left;
+  }
+
+  .myRecipe {
+    flex-direction: column;
+  }
+
+  .myRecipe figure {
+    max-width: 70%;
+  }
+
+  .masonry { /* Masonry container */
+    column-count: 2;
+  }
+
 }

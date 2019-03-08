@@ -1,53 +1,83 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <title>Recipes are Fun</title>
+  </head>
 
-<head>
-  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-  <link rel="stylesheet" href="/css/styles.css" />
-  <title>Recipes are Fun</title>
-
-</head>
-
-<body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/index.html">Recipes are Fun</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-item nav-link active" href="/index.html">Home <span class="sr-only">(current)</span></a>
-        <a class="nav-item nav-link" href="/html/myRecipes.html">My Recipes</a>
-        <a class="nav-item nav-link" href="/html/mealPlan.html">Meal Plan</a>
-        <a class="nav-item nav-link login" href="/html/login.html">Login</a>
-      </div>
+  <body>
+    <div id="app">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <router-link class="navbar-brand" to="/index"
+          >Recipes are Fun</router-link
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <router-link class="nav-item nav-link active" to="/index"
+              >Home <span class="sr-only">(current)</span></router-link
+            >
+            <router-link class="nav-item nav-link" to="/myRecipes"
+              >My Recipes</router-link
+            >
+            <router-link class="nav-item nav-link" to="/mealPlan"
+              >Meal Plan</router-link
+            >
+            <router-link class="nav-item nav-link login" to="/login"
+              >Login
+            </router-link>
+          </div>
+        </div>
+      </nav>
+      <router-view></router-view>
+      <footer>
+        <p>
+          Here is our
+          <a href="https://github.com/TimWhiting/CreativeProjectWebsite"
+            >repository</a
+          >
+        </p>
+      </footer>
     </div>
-  </nav>
-  <main class="mainPageContent">
-    <h1>Public Recipes</h1>
-    <section class="masonry" id="recipeImages">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
 
-    </section>
-  </main>
-  <footer>
-    <p>
-      Here is our <a href="https://github.com/TimWhiting/CreativeProjectWebsite">repository</a>
-    </p>
-  </footer>
-
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-    crossorigin="anonymous"></script>
-  <script src="/crazy.js"></script>
-</body>
-
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.8/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.2/vue-router.min.js"></script>
+    <script src="/crazy.js"></script>
+  </body>
 </html>

@@ -6,8 +6,6 @@ STYLING IDEAS:
 - Hover links (My Recipes)
 */
 
-
-
 /* GENERAL STYLES-----------------------------------------------------------------------------------------------------*/
 body {
   display: flex;
@@ -22,13 +20,19 @@ main {
   margin: 2.5em;
 }
 
+#app {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
 nav {
   flex-shrink: 0;
   flex-grow: 0;
 }
 
 p {
-  margin: .4em;
+  margin: 0.4em;
 }
 
 h1 {
@@ -46,7 +50,7 @@ footer {
   flex-shrink: 0;
   justify-content: center;
   align-items: center;
-  background-color:  rgb(87, 89, 104);
+  background-color: rgb(87, 89, 104);
   color: white;
   padding: 7px;
   font-size: 1.2em;
@@ -62,7 +66,6 @@ footer a:hover {
 }
 
 figure {
-  
 }
 
 figcaption {
@@ -83,16 +86,18 @@ img {
   flex-direction: column;
 }
 
-.masonry { /* Masonry container */
+.masonry {
+  /* Masonry container */
   column-count: 4;
   column-gap: 1em;
 }
-.masonry figure { /* Masonry bricks or child elements */
+.masonry figure {
+  /* Masonry bricks or child elements */
   background-color: rgb(42, 167, 158);
   display: inline-block;
   margin: 0 0 1em;
   width: 100%;
-  box-shadow: .2em .2em .2em .2em rgb(175, 170, 153);
+  box-shadow: 0.2em 0.2em 0.2em 0.2em rgb(175, 170, 153);
   height: auto;
 }
 
@@ -114,7 +119,6 @@ img {
   margin-left: 0em;
   background-color: rgb(42, 167, 158);
   align-self: stretch;
-
 }
 
 .myRecipeList ul {
@@ -122,12 +126,12 @@ img {
   margin-block-start: 0em;
 }
 
-.myRecipeList li{
+.myRecipeList li {
   padding: 5px 2em;
   font-style: italic;
 }
 
-.myRecipeList li:hover{
+.myRecipeList li:hover {
   background-color: rgb(46, 185, 176);
 }
 
@@ -141,7 +145,7 @@ img {
   align-items: center;
   justify-content: space-around;
   padding: 2em 1em;
-  box-shadow: .2em .2em .2em .2em rgb(131, 126, 109);
+  box-shadow: 0.2em 0.2em 0.2em 0.2em rgb(131, 126, 109);
   background-color: rgb(235, 221, 188);
 }
 
@@ -195,11 +199,10 @@ label {
   margin: 30px;
   padding: 15px;
   background-color: rgb(42, 167, 158);
-  box-shadow: .2em .2em .2em .2em rgb(175, 170, 153);
+  box-shadow: 0.2em 0.2em 0.2em 0.2em rgb(175, 170, 153);
 }
 
 /* LOGIN PAGE -----------------------------------------------------------------------------------------------------*/
-
 
 .loginCard {
   display: flex;
@@ -207,7 +210,7 @@ label {
   margin: 30px;
   padding: 20px;
   background-color: rgb(42, 167, 158);
-  box-shadow: .2em .2em .2em .2em rgb(175, 170, 153);
+  box-shadow: 0.2em 0.2em 0.2em 0.2em rgb(175, 170, 153);
 }
 
 .loginForm {
@@ -229,7 +232,7 @@ label {
 
 .navbar-dark .navbar-brand {
   color: white;
-  font-size: 1.50em;
+  font-size: 1.5em;
 }
 
 .navbar-nav {
@@ -239,17 +242,18 @@ label {
 
 .navbar-dark .navbar-nav .nav-link {
   color: rgba(143, 192, 169, 1);
-  font-size: 1.20em;
+  font-size: 1.2em;
 }
 
-.navbar-dark .navbar-nav .active>.nav-link, 
-.navbar-dark .navbar-nav .nav-link.active, 
-.navbar-dark .navbar-nav .nav-link.show, 
-.navbar-dark .navbar-nav .show>.nav-link {
+.navbar-dark .navbar-nav .active > .nav-link,
+.navbar-dark .navbar-nav .nav-link.active,
+.navbar-dark .navbar-nav .nav-link.show,
+.navbar-dark .navbar-nav .show > .nav-link {
   color: rgb(42, 167, 158);
 }
 
-.navbar-dark .navbar-nav .nav-link:focus, .navbar-dark .navbar-nav .nav-link:hover {
+.navbar-dark .navbar-nav .nav-link:focus,
+.navbar-dark .navbar-nav .nav-link:hover {
   color: rgba(200, 213, 185, 1);
 }
 
@@ -260,16 +264,9 @@ label {
   /*border-left: 1px solid rgb(107, 110, 126); */
 }
 
-
-
-
-
-
 /* Mobile Styles */
 
-
-@media (max-width: 1000px){
-
+@media (max-width: 1000px) {
   .login {
     text-align: left;
   }
@@ -282,8 +279,8 @@ label {
     max-width: 70%;
   }
 
-  .masonry { /* Masonry container */
+  .masonry {
+    /* Masonry container */
     column-count: 2;
   }
-
 }

@@ -1,34 +1,46 @@
-const getRandomMealURL = "https://www.themealdb.com/api/json/v1/1/random.php";
-
 const MyRecipesComponent = Vue.component("my-recipes-component", {
   data: function() {
-    return { recipes: [] };
+    return {
+      recipes: [],
+      currentRecipe: null,
+      currentUser: "",
+      allUsers: ["Spencer", "Emily", "Julie"],
+      mode: "view"
+    };
   },
   created() {
     this.getAllRecipes();
   },
   methods: {
     async getAllRecipes() {
-      //get a random recipe
-      //format it
-      //add it to the container
-      let numImages = 15;
-      for (let i = 0; i < numImages; i++) {
-        console.log(getRandomMealURL);
-        let recipe = await axios.get(getRandomMealURL);
-        console.log(recipe.data.meals[0]);
-        this.recipes.push(recipe.data.meals[0]);
-      }
+      let response = await axios.get("/api/recipes");
+      this.recipes = response.data;
     }
   },
   template: `<main class="myRecipeContent">
   <aside class="myRecipeList">
+
+    <h3 v-if="currentUser != ''">{{currentUser}}'s Recipes</h3>
+    <h3 v-else>Your Recipes</h3>
     <ul>
-      <li v-for="recipe in recipes">{{ recipe.strMeal }}</li>
+      <li v-for="recipe in recipes">{{ recipe.title }}</li>
     </ul>
   </aside>
   <section class="myRecipeSection">
     <h1>My Recipes</h1>
+    <section class="menu">
+      <div class="users">
+        <datalist id="users">
+          <option v-for="user in allUsers" :value="user"></option>
+        </datalist>
+        <input list="users" name="userInput" v-model="currentUser" placeHolder="Select User" class="largeSelector"/>
+      </div>
+      <div class="controls">
+        <button><img src="/images/plus.png"/></button>
+        <button><img src="/images/pencil.png"/></button>
+        <button><img src="/images/trash.png"/></button>
+      </div>
+    </section>
     <article class="myRecipe">
       <figure>
         <img src="/images/brownies.jpg" />

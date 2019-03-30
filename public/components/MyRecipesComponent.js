@@ -10,7 +10,7 @@ const MyRecipesComponent = Vue.component("my-recipes-component", {
       recipeIndex: 0,
       currentUser: "Spencer",
       allUsers: ["Spencer", "Emily", "Julie"],
-      mode: "add",
+      mode: "view",
       newRecipe: { ingredients: [], title: "", instructions: [] },
       newImage: null,
       newIngredient: "",

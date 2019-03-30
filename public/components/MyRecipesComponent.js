@@ -107,6 +107,8 @@ const MyRecipesComponent = Vue.component("my-recipes-component", {
           this.getAllRecipes();
         }
       } catch (error) {
+        this.error =
+          "Error saving recipe, look in the console if you dare (probably your image is too big)";
         console.log(error);
       }
     },
@@ -122,6 +124,7 @@ const MyRecipesComponent = Vue.component("my-recipes-component", {
           this.getAllRecipes();
         }
       } catch (error) {
+        this.error = "Error updated recipe, look in the console if you dare";
         console.log(error);
       }
     },
@@ -150,6 +153,7 @@ const MyRecipesComponent = Vue.component("my-recipes-component", {
           "/api/recipes/" + this.currentRecipe._id
         );
       } catch (error) {
+        this.error = "Error deleting recipe, look in the console if you dare";
         console.log(error);
       }
       this.getAllRecipes();

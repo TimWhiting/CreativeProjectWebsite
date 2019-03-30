@@ -41,6 +41,9 @@ const MyRecipesComponent = Vue.component("my-recipes-component", {
       this.recipes = response.data;
       if (this.recipes.length > 0) {
         this.recipeIndex = 0;
+      } else {
+        this.resetNewRecipe();
+        this.mode = "add";
       }
     },
     resetNewRecipe() {

@@ -50,6 +50,7 @@ const MyRecipesComponent = Vue.component("my-recipes-component", {
       this.newRecipe = { ingredients: [], title: "", instructions: [] };
       this.newIngredient = "";
       this.newInstruction = "";
+      this.error = "";
       this.newImage = null;
     },
     addIngredient() {

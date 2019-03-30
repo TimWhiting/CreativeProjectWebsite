@@ -217,7 +217,7 @@ const MyRecipesComponent = Vue.component("my-recipes-component", {
           </ol>
         </section>
       <input v-if="mode == 'add'" type="file" name="photo" @change="changeImage"></input>
-      <p>Large images will take a long time and give you an error</p>
+      <p>Large images will take a long time to upload and give you an error</p>
       <button v-if="mode == 'edit'" @click="updateRecipe">Update Recipe</button>
       <button v-else @click="saveRecipe">Save Recipe</button>
       <br/>

@@ -108,6 +108,7 @@ app.get("/api/recipes", async (req, res) => {
 app.delete("/api/recipes/:id", async (req, res) => {
   try {
     await Recipe.deleteOne({ _id: req.params.id });
+    res.sendStatus(200);
   } catch (error) {
     console.log(error);
     res.sendStatus(500);

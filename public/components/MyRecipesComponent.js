@@ -152,11 +152,11 @@ const MyRecipesComponent = Vue.component("my-recipes-component", {
         let recipeResponse = await axios.delete(
           "/api/recipes/" + this.currentRecipe._id
         );
+        this.getAllRecipes();
       } catch (error) {
         this.error = "Error deleting recipe, look in the console if you dare";
         console.log(error);
       }
-      this.getAllRecipes();
     }
   },
   template: `<main class="myRecipeContent">

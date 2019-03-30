@@ -1,10 +1,6 @@
 /*
 TO-DO LIST:
-    - Make recipes clickable on the side
-    - Add edit and delete capabilities, both for pages and for individual items (-)
-    - Error check (properties != null)
-    - Minor styling (move buttons to the right, adjust sidebar size dynamically, make recipe content box wider, center all the things)
-    - Connect modes to buttons (add, edit, delete)
+     - Adjust sidebar size dynamically
 */
 
 const MyRecipesComponent = Vue.component("my-recipes-component", {
@@ -12,16 +8,22 @@ const MyRecipesComponent = Vue.component("my-recipes-component", {
     return {
       recipes: [],
       recipeIndex: 0,
-      currentUser: "",
+      currentUser: "Spencer",
       allUsers: ["Spencer", "Emily", "Julie"],
       mode: "view",
       newRecipe: { ingredients: [], title: "", instructions: [] },
       newImage: null,
       newIngredient: "",
-      newInstruction: ""
+      newInstruction: "",
+      error: ""
     };
   },
   computed: {
+    showEditForm() {
+      return (
+        this.mode == "edit" || this.mode == "add" || this.recipes.length < 1
+      );
+    },
     currentRecipe() {
       if (this.recipeIndex < this.recipes.length) {
         return this.recipes[this.recipeIndex];
@@ -41,6 +43,12 @@ const MyRecipesComponent = Vue.component("my-recipes-component", {
         this.recipeIndex = 0;
       }
     },
+    resetNewRecipe() {
+      this.newRecipe = { ingredients: [], title: "", instructions: [] };
+      this.newIngredient = "";
+      this.newInstruction = "";
+      this.newImage = null;
+    },
     addIngredient() {
       this.newRecipe.ingredients.push(this.newIngredient);
       this.newIngredient = "";
@@ -52,35 +60,103 @@ const MyRecipesComponent = Vue.component("my-recipes-component", {
     changeImage(event) {
       this.newImage = event.target.files[0];
     },
+    checkData() {
+      if (this.allUsers.includes(this.currentUser)) {
+        if (this.newImage != null && this.newImage.name != "") {
+          if (this.newRecipe.title != "") {
+            if (this.newRecipe.ingredients.length >= 1) {
+              if (this.newRecipe.instructions.length >= 1) {
+                return true;
+              } else {
+                this.error = "You need to specify at least one instruction!";
+                return false;
+              }
+            } else {
+              this.error = "You need to specify at least one ingredient!";
+              return false;
+            }
+          } else {
+            this.error = "You need to specify a title!";
+            return false;
+          }
+        } else {
+          this.error = "You need to choose a file to upload!";
+          return false;
+        }
+      } else {
+        this.error = "You need to specify a user!";
+        return false;
+      }
+    },
     async saveRecipe() {
       try {
-        const formData = new FormData();
-        formData.append("photo", this.newImage, this.newImage.name);
-        let photoResponse = await axios.post("/api/photos", formData);
+        if (this.checkData()) {
+          const formData = new FormData();
+          formData.append("photo", this.newImage, this.newImage.name);
+          let photoResponse = await axios.post("/api/photos", formData);
 
-        this.newRecipe.user = this.currentUser;
-        this.newRecipe.imagePath = photoResponse.data.path;
+          this.newRecipe.user = this.currentUser;
+          this.newRecipe.imagePath = photoResponse.data.path;
 
-        let recipeResponse = await axios.post("/api/recipes", this.newRecipe);
-
-        this.newRecipe = { ingredients: [], title: "", instructions: [] };
-        this.newIngredient = "";
-        this.newIngredient = "";
-        this.newImage = null;
-        this.mode = "view";
-        this.getAllRecipes();
+          let recipeResponse = await axios.post("/api/recipes", this.newRecipe);
+          this.resetNewRecipe();
+          this.mode = "view";
+          this.getAllRecipes();
+        }
       } catch (error) {
         console.log(error);
       }
+    },
+    async updateRecipe() {
+      try {
+        if (this.checkData()) {
+          let recipeResponse = await axios.put(
+            "/api/recipes/" + this.newRecipe._id,
+            this.newRecipe
+          );
+          this.resetNewRecipe();
+          this.mode = "view";
+          this.getAllRecipes();
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    selectRecipe(index) {
+      this.mode = "view";
+      this.recipeIndex = index;
+    },
+    handleAddRecipe() {
+      this.resetNewRecipe();
+      this.mode = "add";
+    },
+    handleEditRecipe() {
+      this.mode = "edit";
+      //placeholders
+      this.newRecipe = this.currentRecipe;
+    },
+    removeIngredient(index) {
+      this.newRecipe.ingredients.splice(index, 1);
+    },
+    removeInstruction(index) {
+      this.newRecipe.instructions.splice(index, 1);
+    },
+    async handleDeleteRecipe() {
+      try {
+        let recipeResponse = await axios.delete(
+          "/api/recipes/" + this.currentRecipe._id
+        );
+      } catch (error) {
+        console.log(error);
+      }
+      this.getAllRecipes();
     }
   },
   template: `<main class="myRecipeContent">
   <aside class="myRecipeList">
-
-    <h3 v-if="currentUser != ''">{{currentUser}}'s Recipes</h3>
-    <h3 v-else>Your Recipes</h3>
+    <h3>Your Recipes</h3>
     <ul>
-      <li v-for="recipe in recipes">{{ recipe.title }}</li>
+      <li v-for="(recipe, index) in recipes" @click="selectRecipe(index)" v-bind:class="{selected: index == recipeIndex}">{{ recipe.title }}</li>
     </ul>
   </aside>
   <section class="myRecipeSection">
@@ -93,12 +169,53 @@ const MyRecipesComponent = Vue.component("my-recipes-component", {
         <input list="users" name="userInput" v-model="currentUser" placeHolder="Select User" class="largeSelector"/>
       </div>
       <div class="controls">
-        <button><img src="/images/plus.png"/></button>
-        <button><img src="/images/pencil.png"/></button>
-        <button><img src="/images/trash.png"/></button>
+        <button v-if="mode != 'add'" @click="handleAddRecipe"><img src="/images/plus.png"/></button>
+        <button v-if="mode == 'view'" @click="handleEditRecipe"><img src="/images/pencil.png"/></button>
+        <button v-if="mode == 'view'" @click="handleDeleteRecipe"><img src="/images/trash.png"/></button>
       </div>
     </section>
-    <article class="myRecipe" v-if="currentRecipe">
+    <article v-bind:class="{myRecipe:true, adding: mode=='add'} " v-if="showEditForm">
+      <figure v-if="mode == 'edit'">
+        <img v-bind:src="newRecipe.imagePath" />
+      </figure>
+      <figure v-else id="spiceFigure">
+        <img src="/images/spice.jpg" />
+      </figure>
+      <section class="recipeCard">
+        <p class="error">{{this.error}}</p>
+        <input type="text" v-model="newRecipe.title" placeholder="Recipe Title"></input>
+        <section class="ingredientSection">
+          <h3>Ingredients</h3>
+          <ul class="ingredients">
+            <li v-for="(ingredient,index) in newRecipe.ingredients">
+              <input type="text" v-model="newRecipe.ingredients[index]">
+              <button @click="removeIngredient(index)"> x </button>
+            </li>
+            <li>
+              <input type="text" v-model="newIngredient" placeholder="Add ingredient"></input>
+              <button @click="addIngredient"> + </button>
+            </li>
+          </ul>
+        </section>
+        <section class="instructionSection">
+          <h3>Instructions</h3>
+          <ol class="ingredients">
+            <li v-for="(instruction, index) in newRecipe.instructions">
+              <input type="text" v-model="newRecipe.instructions[index]">
+              <button @click="removeInstruction(index)"> x </button>
+            </li>
+            <li><input type="text" v-model="newInstruction" placeholder="Add instruction"></input>
+              <button @click="addInstruction"> + </button>
+            </li>
+          </ol>
+        </section>
+      <input v-if="mode == 'add'" type="file" name="photo" @change="changeImage"></input>
+      <button v-if="mode == 'edit'" @click="updateRecipe">Update Recipe</button>
+      <button v-else @click="saveRecipe">Save Recipe</button>
+      <br/>
+     </section>
+    </article>
+    <article class="myRecipe" v-else>
       <figure>
         <img v-bind:src="currentRecipe.imagePath" />
       </figure>
@@ -116,31 +233,6 @@ const MyRecipesComponent = Vue.component("my-recipes-component", {
           </ol>
         </section>
       </section>
-    </article>
-    <article class="myRecipe" v-else>
-      <input type="text" v-model="newRecipe.title" placeholder="Recipe Title"></input>
-    <section class="ingredientSection">
-      <h3>Ingredients</h3>
-      <ul class="ingredients">
-        <li v-for="ingredient in newRecipe.ingredients">{{ ingredient }}</li>
-        <li><input type="text" v-model="newIngredient" placeholder="Add ingredient"></input>
-          <button @click="addIngredient"> + </button>
-        </li>
-      </ul>
-    </section>
-    <section class="instructionSection">
-      <h3>Instructions</h3>
-      <ol class="ingredients">
-        <li v-for="instruction in newRecipe.instructions">{{ instruction }}</li>
-        <li><input type="text" v-model="newInstruction" placeholder="Add instruction"></input>
-          <button @click="addInstruction"> + </button>
-        </li>
-      </ol>
-    </section>
-    <section class="imageSection">
-      <input type="file" name="photo" @change="changeImage"></input>
-    </section>
-    <button @click="saveRecipe">Save Recipe</button>
     </article>
   </section>
 </main>`

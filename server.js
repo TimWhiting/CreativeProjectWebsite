@@ -122,6 +122,7 @@ app.put("/api/recipes/:id", async (req, res) => {
     recipe.ingredients = req.body.ingredients;
     recipe.instructions = req.body.instructions;
     recipe.save();
+    res.send(recipe);
   } catch (error) {
     console.log(error);
     res.sendStatus(500);

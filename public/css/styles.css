@@ -110,6 +110,7 @@ button img {
   align-items: center;
   margin: 0px;
   align-self: flex-start;
+  width: 100%;
 }
 
 .myRecipeContent h1 {
@@ -121,7 +122,12 @@ button img {
   margin-left: 0em;
   background-color: rgb(42, 167, 158);
   align-self: stretch;
-  min-width: 200px;
+  min-width: 225px;
+}
+
+.selected {
+  background-color: rgb(46, 185, 176);
+  font-weight: bold;
 }
 
 .myRecipeList ul {
@@ -135,7 +141,7 @@ button img {
 }
 
 .myRecipeList li:hover {
-  background-color: rgb(46, 185, 176);
+  background-color: rgb(84, 195, 188);
 }
 
 .myRecipeList ul {
@@ -155,7 +161,9 @@ button img {
 .largeSelector {
   padding: 5px;
   align-self: center;
+  margin-bottom: 0px;
 }
+
 .myRecipe {
   margin: 35px;
   display: flex;
@@ -172,11 +180,22 @@ button img {
   order: 1;
   max-width: 40%;
 }
+/*
+.myRecipe img {
+  max-height: 60vh;
+}*/
+
+#spiceFigure {
+  min-width: 50%;
+  max-width: 60%;
+}
 
 .myRecipeSection {
   display: flex;
   flex-direction: column;
   align-self: flex-start;
+  width: 100%;
+  height: 100%;
 }
 
 .myRecipe img {
@@ -187,6 +206,11 @@ button img {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+
+.error {
+  color: red;
+  font-size: 25px;
 }
 
 /* MEAL PLAN PAGE -----------------------------------------------------------------------------------------------------*/
